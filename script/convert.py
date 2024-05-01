@@ -5,23 +5,31 @@ from pathlib import Path
 import re
 
 def convert(file_path):
+    # Uncomment whichever one of these you need to use. This is not run
+    # automatically, but is only there for developer convenience.
+
+    # English files.
+    # regex_pattern = re.compile("^([a-zA-Z\d]+)			(.+)$")
+
+    # Danish file.
+    # regex_pattern = re.compile("^([a-zA-ZÆæØøÅå\d]+)	/(.+)/	wiki$")
+
+    # German file.
+    # regex_pattern = re.compile("^([a-zA-ZäöüßÄÖÜ\d]+)	/(.+)/	wiki$")
+
+    # Swedish file.
+    # regex_pattern = re.compile("^([a-zA-ZäöÄÖÆæØøÅå\d]+)	/(.+)/	ipa$")
+
+    # Czech file.
+    # Matches normal letters + ě,š,č,ř,ž,ý,á,í,é,ó,ú,ů,ď,ť,ň with their capital versions as well.
+    regex_pattern = re.compile("^([a-zA-ZěščřžýáíéóúůďťňĎŇŤŠČŘŽÝÁÍÉÚŮĚÓ\d]+)	/(.+)/	wiki$")
+
     file = open(file_path, 'r', encoding='utf-8')
     file_contents = file.read()
     dict = []
-    # English files.
-    # pattern = re.compile("^([a-zA-Z\d]+)			(.+)$")
-
-    # Danish file.
-    # pattern = re.compile("^([a-zA-ZÆæØøÅå\d]+)	/(.+)/	wiki$")
-
-    # German file.
-    # pattern = re.compile("^([a-zA-ZäöüßÄÖÜ\d]+)	/(.+)/	wiki$")
-
-    # Swedish file.
-    pattern = re.compile("^([a-zA-ZäöÄÖÆæØøÅå\d]+)	/(.+)/	ipa$")
 
     for line in file_contents.splitlines():
-        parts = pattern.match(line)
+        parts = regex_pattern.match(line)
 
         if not parts:
             continue

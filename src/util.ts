@@ -20,8 +20,11 @@ export const getTranslation = (text: string, language: Languages, includeAccents
     case Languages.Swedish:
       dictionary = require("./data/SV_dictionary.json");
       break;
-    default:
+    case Languages.Czech:
+      dictionary = require("./data/CZ_dictionary.json");
       break;
+    default:
+      return "This language is not supported yet!";
   }
 
   const result: string[] = [];
