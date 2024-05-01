@@ -12,17 +12,17 @@ def convert(file_path):
     # regex_pattern = re.compile("^([a-zA-Z\d]+)			(.+)$")
 
     # Danish file.
-    # regex_pattern = re.compile("^([a-zA-ZÆæØøÅå\d]+)	/(.+)/	wiki$")
+    # regex_pattern = re.compile("^([a-zA-ZÆæØøÅå\d]+)\s/(.+)/\swiki$")
 
     # German file.
-    # regex_pattern = re.compile("^([a-zA-ZäöüßÄÖÜ\d]+)	/(.+)/	wiki$")
+    # regex_pattern = re.compile("^([a-zA-ZäöüßÄÖÜ]+)\s/(.+)/\sipa$")
 
     # Swedish file.
-    # regex_pattern = re.compile("^([a-zA-ZäöÄÖÆæØøÅå\d]+)	/(.+)/	ipa$")
+    regex_pattern = re.compile("^([a-zA-ZäöÄÖÆæØøÅå\d]+)\s/(.+)/\sipa$")
 
     # Czech file.
     # Matches normal letters + ě,š,č,ř,ž,ý,á,í,é,ó,ú,ů,ď,ť,ň with their capital versions as well.
-    regex_pattern = re.compile("^([a-zA-ZěščřžýáíéóúůďťňĎŇŤŠČŘŽÝÁÍÉÚŮĚÓ\d]+)	/(.+)/	wiki$")
+    # regex_pattern = re.compile("^([a-zA-ZěščřžýáíéóúůďťňĎŇŤŠČŘŽÝÁÍÉÚŮĚÓ\d]+)\s/(.+)/\swiki$")
 
     file = open(file_path, 'r', encoding='utf-8')
     file_contents = file.read()

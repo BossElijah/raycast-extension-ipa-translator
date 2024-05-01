@@ -36,7 +36,17 @@ export const getTranslation = (text: string, language: Languages, includeAccents
     const word = dictionary.dict.find(({ original }) => original == item);
     if (!word) {
       if (item) {
-        result.push(item);
+        // If a word doesn't match a word in the dictionary, check if any of the
+        // letters match something, otherwise return the letter as input.
+        const letterArray = item.split("");
+        letterArray.forEach((nestedItem) => {
+          const letter = dictionary.dict.find(({ original }) => original == nestedItem);
+          if (letter) {
+            result.push(letter.ipa);
+          } else {
+            result.push(nestedItem);
+          }
+        });
       }
     } else {
       result.push(word.ipa);
