@@ -1,24 +1,33 @@
 import { Form, ActionPanel, Action } from "@raycast/api";
 import { useState } from "react";
 import { getTranslation } from "./util";
+import { Languages } from "./types";
 
 export default function Command() {
   const [text, setText] = useState("");
   const [includeAccents, setIncludeAccents] = useState(true);
+  const [language, setLanguage] = useState<Languages>(Languages.English);
+
   const [translated, setTranslated] = useState("");
 
-  const handleSubmit = (textToTranslate: string, accents: boolean) => {
-    setTranslated(getTranslation(textToTranslate, accents));
+  const handleSubmit = (textToTranslate: string, lang: Languages, accents: boolean) => {
+    setTranslated(getTranslation(textToTranslate, lang, accents));
   };
 
   const onTextChange = (newValue: string) => {
     setText(newValue);
-    handleSubmit(newValue, includeAccents);
+    handleSubmit(newValue, language, includeAccents);
+  };
+
+  const onLanguageChange = (newValue: string) => {
+    const value = newValue as Languages;
+    setLanguage(value);
+    handleSubmit(text, value, includeAccents);
   };
 
   const onAccentsChange = (newValue: boolean) => {
     setIncludeAccents(newValue);
-    handleSubmit(text, newValue);
+    handleSubmit(text, language, newValue);
   };
 
   return (
@@ -32,13 +41,20 @@ export default function Command() {
     >
       <Form.Description text="Write something in plain English and watch it being converted to IPA." />
       <Form.TextArea id="textarea" title="English input" placeholder="Enter or paste text" onChange={onTextChange} />
-      <Form.Checkbox
-        id="accents"
-        label="Include accents"
-        storeValue
-        value={includeAccents}
-        onChange={onAccentsChange}
-      />
+      <Form.Dropdown id="dropdown" title="Choose Language" value={language} onChange={onLanguageChange}>
+        {Object.values(Languages).map((item) => (
+          <Form.Dropdown.Item value={item} title={item} key={item} />
+        ))}
+      </Form.Dropdown>
+      {language === Languages.English && (
+        <Form.Checkbox
+          id="accents"
+          label="Include accents"
+          storeValue
+          value={includeAccents}
+          onChange={onAccentsChange}
+        />
+      )}
       <Form.Separator />
       <Form.Description title="Translated IPA" text={translated} />
     </Form>
