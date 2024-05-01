@@ -3,7 +3,8 @@ import { useState } from "react";
 import { getTranslation } from "./util";
 import { Languages } from "./types";
 
-export default function Command() {
+// TODO: Persist language in local storage.
+const Command = () => {
   const [text, setText] = useState("");
   const [includeAccents, setIncludeAccents] = useState(true);
   const [language, setLanguage] = useState<Languages>(Languages.English);
@@ -59,4 +60,6 @@ export default function Command() {
       <Form.Description title="Translated IPA" text={translated} />
     </Form>
   );
-}
+};
+
+export default Command;
