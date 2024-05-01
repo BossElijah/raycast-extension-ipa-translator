@@ -1,34 +1,25 @@
-import { Form, ActionPanel, Action } from "@raycast/api";
+import { ActionPanel, Action, Form } from "@raycast/api";
 import { useState } from "react";
-import { getTranslation } from "./util";
 import { Languages } from "./types";
+import { getTranslation } from "./util";
 
-// TODO: Persist language in local storage.
-const Command = () => {
+export const CustomForm = ({ language, accentSwitch }: { language: Languages; accentSwitch: boolean }) => {
   const [text, setText] = useState("");
   const [includeAccents, setIncludeAccents] = useState(true);
-  const [language, setLanguage] = useState<Languages>(Languages.English);
-
   const [translated, setTranslated] = useState("");
 
-  const handleSubmit = (textToTranslate: string, lang: Languages, accents: boolean) => {
-    setTranslated(getTranslation(textToTranslate, lang, accents));
+  const handleSubmit = (textToTranslate: string, accents: boolean) => {
+    setTranslated(getTranslation(textToTranslate, language, accents));
   };
 
   const onTextChange = (newValue: string) => {
     setText(newValue);
-    handleSubmit(newValue, language, includeAccents);
-  };
-
-  const onLanguageChange = (newValue: string) => {
-    const value = newValue as Languages;
-    setLanguage(value);
-    handleSubmit(text, value, includeAccents);
+    handleSubmit(newValue, includeAccents);
   };
 
   const onAccentsChange = (newValue: boolean) => {
     setIncludeAccents(newValue);
-    handleSubmit(text, language, newValue);
+    handleSubmit(text, newValue);
   };
 
   return (
@@ -47,12 +38,7 @@ const Command = () => {
         placeholder="Enter or paste text"
         onChange={onTextChange}
       />
-      <Form.Dropdown id="dropdown" title="Choose Language" value={language} onChange={onLanguageChange}>
-        {Object.values(Languages).map((item) => (
-          <Form.Dropdown.Item value={item} title={item} key={item} />
-        ))}
-      </Form.Dropdown>
-      {language === Languages.English && (
+      {accentSwitch && (
         <Form.Checkbox
           id="accents"
           label="Include accents"
@@ -66,5 +52,3 @@ const Command = () => {
     </Form>
   );
 };
-
-export default Command;

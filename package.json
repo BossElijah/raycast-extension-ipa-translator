@@ -11,9 +11,21 @@
   "license": "MIT",
   "commands": [
     {
-      "name": "index",
-      "title": "IPA Translator",
-      "description": "Convert words to international phonetic alphabet.",
+      "name": "english-to-ipa",
+      "title": "Translate English to IPA",
+      "description": "Convert english to international phonetic alphabet.",
+      "mode": "view"
+    },
+    {
+      "name": "danish-to-ipa",
+      "title": "Translate Danish to IPA",
+      "description": "Convert danish to international phonetic alphabet.",
+      "mode": "view"
+    },
+    {
+      "name": "german-to-ipa",
+      "title": "Translate German to IPA",
+      "description": "Convert german to international phonetic alphabet.",
       "mode": "view"
     }
   ],

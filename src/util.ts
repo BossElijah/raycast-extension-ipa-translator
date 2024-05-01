@@ -10,8 +10,6 @@ export const getTranslation = (text: string, language: Languages, includeAccents
   const regex = /[.,/#!$%^&*;?:{}=\-_`~()]/g;
   const words = text.toLowerCase().replace(regex, "").split(" ");
 
-  console.log(language);
-
   let dictionary: DictionaryItem[];
 
   switch (language) {
