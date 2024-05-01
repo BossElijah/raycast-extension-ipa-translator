@@ -3,7 +3,7 @@
   "name": "ipa-translator",
   "title": "IPA Translator",
   "description": "Converts words to IPA (International Phonetic Alphabet)",
-  "icon": "command-icon.png",
+  "icon": "logo.png",
   "author": "BossElijah",
   "categories": [
     "Fun"
