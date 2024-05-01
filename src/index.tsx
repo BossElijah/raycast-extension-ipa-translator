@@ -40,8 +40,13 @@ const Command = () => {
         </ActionPanel>
       }
     >
-      <Form.Description text="Write something in plain English and watch it being converted to IPA." />
-      <Form.TextArea id="textarea" title="English input" placeholder="Enter or paste text" onChange={onTextChange} />
+      <Form.Description text={`Write something in plain ${language} and watch it being converted to IPA.`} />
+      <Form.TextArea
+        id="textarea"
+        title={`${language} input`}
+        placeholder="Enter or paste text"
+        onChange={onTextChange}
+      />
       <Form.Dropdown id="dropdown" title="Choose Language" value={language} onChange={onLanguageChange}>
         {Object.values(Languages).map((item) => (
           <Form.Dropdown.Item value={item} title={item} key={item} />

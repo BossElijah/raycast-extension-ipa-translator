@@ -1,8 +1,8 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "english-to-ipa",
-  "title": "English to IPA",
-  "description": "Converts english to IPA (International Phonetic Alphabet)",
+  "name": "ipa-translator",
+  "title": "IPA Translator",
+  "description": "Converts words to IPA (International Phonetic Alphabet)",
   "icon": "command-icon.png",
   "author": "BossElijah",
   "categories": [
@@ -12,8 +12,8 @@
   "commands": [
     {
       "name": "index",
-      "title": "English to IPA",
-      "description": "Convert english to international phonetic alphabet.",
+      "title": "IPA Translator",
+      "description": "Convert words to international phonetic alphabet.",
       "mode": "view"
     }
   ],

@@ -1,3 +1,3 @@
-# English to IPA
+# IPA Translator
 
-Converts english to IPA (International Phonetic Alphabet)
+Converts words to IPA (International Phonetic Alphabet)
