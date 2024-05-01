@@ -11,4 +11,5 @@ export enum Languages {
   English = "English",
   Danish = "Danish",
   German = "German",
+  Swedish = "Swedish",
 }

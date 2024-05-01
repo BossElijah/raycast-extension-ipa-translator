@@ -10,10 +10,15 @@ def convert(file_path):
     dict = []
     # English files.
     # pattern = re.compile("^([a-zA-Z\d]+)			(.+)$")
+
     # Danish file.
     # pattern = re.compile("^([a-zA-ZÆæØøÅå\d]+)	/(.+)/	wiki$")
+
     # German file.
-    pattern = re.compile("^([a-zA-ZäöüßÄÖÜ\d]+)	/(.+)/	wiki$")
+    # pattern = re.compile("^([a-zA-ZäöüßÄÖÜ\d]+)	/(.+)/	wiki$")
+
+    # Swedish file.
+    pattern = re.compile("^([a-zA-ZäöÄÖÆæØøÅå\d]+)	/(.+)/	ipa$")
 
     for line in file_contents.splitlines():
         parts = pattern.match(line)

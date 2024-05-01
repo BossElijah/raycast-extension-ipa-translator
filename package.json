@@ -27,6 +27,12 @@
       "title": "Translate German to IPA",
       "description": "Convert german to international phonetic alphabet.",
       "mode": "view"
+    },
+    {
+      "name": "swedish-to-ipa",
+      "title": "Translate Swedish to IPA",
+      "description": "Convert swedish to international phonetic alphabet.",
+      "mode": "view"
     }
   ],
   "dependencies": {

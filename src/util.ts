@@ -1,34 +1,36 @@
-import enDictionary from "./data/EN_dictionary.json";
-import enDictionaryNoAccents from "./data/EN_dictionary-no-accents.json";
-import daDictionary from "./data/DA_dictionary.json";
-import deDictionary from "./data/DE_dictionary.json";
-import { Dictionary, DictionaryItem, Languages } from "./types";
+import { Dictionary, Languages } from "./types";
 
 export const getTranslation = (text: string, language: Languages, includeAccents: boolean) => {
-  const result: string[] = [];
-  // Remove all punctuation.
-  const regex = /[.,/#!$%^&*;?:{}=\-_`~()]/g;
-  const words = text.toLowerCase().replace(regex, "").split(" ");
-
-  let dictionary: DictionaryItem[];
+  let dictionary: Dictionary;
 
   switch (language) {
     case Languages.English:
-      dictionary = includeAccents ? enDictionary.dict : (enDictionaryNoAccents as Dictionary).dict;
+      if (includeAccents) {
+        dictionary = require("./data/EN_dictionary.json");
+      } else {
+        dictionary = require("./data/EN_dictionary-no-accents.json");
+      }
       break;
     case Languages.Danish:
-      dictionary = daDictionary.dict;
+      dictionary = require("./data/DA_dictionary.json");
       break;
     case Languages.German:
-      dictionary = deDictionary.dict;
+      dictionary = require("./data/DE_dictionary.json");
       break;
-    // TODO: Add more languages.
+    case Languages.Swedish:
+      dictionary = require("./data/SV_dictionary.json");
+      break;
     default:
       break;
   }
 
+  const result: string[] = [];
+  // Remove all punctuation.
+  const regex = /[.,/#!$%^&*;?:{}=\-_`~()]/g;
+  const words = text.toLowerCase().replace(regex, " ").split(" ");
+
   words.forEach((item) => {
-    const word = dictionary.find(({ original }) => original == item);
+    const word = dictionary.dict.find(({ original }) => original == item);
     if (!word) {
       if (item) {
         result.push(item);
