@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Languages } from "./types";
 import { getTranslation } from "./util";
 
-export const CustomForm = ({ language, accentSwitch }: { language: Languages; accentSwitch: boolean }) => {
+export const CustomForm = ({ language, accentSwitch }: { language: Languages; accentSwitch?: boolean }) => {
   const [text, setText] = useState("");
   const [includeAccents, setIncludeAccents] = useState(true);
   const [translated, setTranslated] = useState("");
