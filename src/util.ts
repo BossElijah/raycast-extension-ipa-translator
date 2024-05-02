@@ -6,22 +6,22 @@ export const getTranslation = (text: string, language: Languages, includeAccents
   switch (language) {
     case Languages.English:
       if (includeAccents) {
-        dictionary = require("./data/EN_dictionary.json");
+        dictionary = require("../assets/data/EN_dictionary.json");
       } else {
-        dictionary = require("./data/EN_dictionary-no-accents.json");
+        dictionary = require("../assets/data/EN_dictionary-no-accents.json");
       }
       break;
     case Languages.Danish:
-      dictionary = require("./data/DA_dictionary.json");
+      dictionary = require("../assets/data/DA_dictionary.json");
       break;
     case Languages.German:
-      dictionary = require("./data/DE_dictionary.json");
+      dictionary = require("../assets/data/DE_dictionary.json");
       break;
     case Languages.Swedish:
-      dictionary = require("./data/SV_dictionary.json");
+      dictionary = require("../assets/data/SV_dictionary.json");
       break;
     case Languages.Czech:
-      dictionary = require("./data/CZ_dictionary.json");
+      dictionary = require("../assets/data/CZ_dictionary.json");
       break;
     default:
       return "This language is not supported yet!";
@@ -29,7 +29,7 @@ export const getTranslation = (text: string, language: Languages, includeAccents
 
   const result: string[] = [];
   // Remove all punctuation.
-  const regex = /[.,/#!$%^&*;?:{}=\-_`~()]/g;
+  const regex = /[.,/#!$%^&*;?+:{}=\-_`~()]/g;
   const words = text.toLowerCase().replace(regex, " ").split(" ");
 
   words.forEach((item) => {
