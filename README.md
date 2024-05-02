@@ -3,8 +3,8 @@
 Converts text to IPA (International Phonetic Alphabet). It supports English, German, Danish, Swedish, and Czech.
 There are commands to copy the translated text or the original text.
 
-![Image](assets/screenshot-eng.png)
-![Image](assets/screenshot-eng-actions.png)
+![Image](media/ipa-translator-1.png)
+![Image](media/ipa-translator-4.png)
 
 ## Development
 
