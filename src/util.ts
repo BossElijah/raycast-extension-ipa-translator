@@ -1,39 +1,16 @@
 import { readFileSync } from "fs-extra";
-import { Dictionary, Languages } from "./types";
+import { Dictionary } from "./types";
 
-const readFileFS = (path: string) => {
+export const readDictionaryData = (path: string) => {
   return readFileSync(__dirname + "/assets/data/" + path, "utf8");
 };
 
-export const getTranslation = (text: string, language: Languages, includeAccents: boolean) => {
-  let dictionaryPlaceholder: string;
-
-  switch (language) {
-    case Languages.English:
-      if (includeAccents) {
-        dictionaryPlaceholder = readFileFS("EN_dictionary.json");
-      } else {
-        dictionaryPlaceholder = readFileFS("EN_dictionary-no-accents.json");
-      }
-      break;
-    case Languages.Danish:
-      dictionaryPlaceholder = readFileFS("DA_dictionary.json");
-      break;
-    case Languages.German:
-      dictionaryPlaceholder = readFileFS("DE_dictionary.json");
-      break;
-    case Languages.Swedish:
-      dictionaryPlaceholder = readFileFS("SV_dictionary.json");
-      break;
-    case Languages.Czech:
-      dictionaryPlaceholder = readFileFS("CZ_dictionary.json");
-      break;
-    default:
-      return "This language is not supported yet!";
+export const getTranslation = (text: string, dictionaryPlaceholder: string) => {
+  if (!text) {
+    return "";
   }
-
   if (!dictionaryPlaceholder) {
-    return "There were problems receiving the dictionary data.";
+    return "This language is not supported yet!";
   }
 
   const dictionary: Dictionary = JSON.parse(dictionaryPlaceholder);
