@@ -1,5 +1,5 @@
 import { readFileSync } from "fs-extra";
-import { Dictionary } from "./types";
+import { DictionaryItem } from "./types";
 import { Dispatch, SetStateAction } from "react";
 
 export const readDictionaryData = (path: string) => {
@@ -18,7 +18,7 @@ export const getTranslation = (
     return "This language is not supported yet!";
   }
 
-  const dictionary: Dictionary = JSON.parse(dictionaryPlaceholder);
+  const dictionary: DictionaryItem[] = JSON.parse(dictionaryPlaceholder);
 
   const result: string[] = [];
   const words = text
@@ -32,7 +32,7 @@ export const getTranslation = (
     .split(" ");
 
   words.forEach((item) => {
-    const word = dictionary.dict.find(({ o: original }) => original == item);
+    const word = dictionary.find(({ o: original }) => original == item);
     if (!word) {
       if (item) {
         setWordsNotFound((prevState) => [...prevState, item]);
@@ -40,7 +40,7 @@ export const getTranslation = (
         // letters match something, otherwise return the letter as input.
         const letterArray = item.split("");
         letterArray.forEach((nestedItem) => {
-          const letter = dictionary.dict.find(({ o: original }) => original == nestedItem);
+          const letter = dictionary.find(({ o: original }) => original == nestedItem);
           if (letter) {
             result.push(letter.i);
           } else {

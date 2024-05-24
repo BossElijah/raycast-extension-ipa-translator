@@ -40,7 +40,7 @@ def convert(file_path):
     for attr, value in placeholder.items():
         dict.append(value)
 
-    return {'dict': dict}
+    return dict
 
 
 textFilePath = sys.argv[1]

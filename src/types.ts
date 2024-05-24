@@ -5,10 +5,6 @@ export interface DictionaryItem {
   i: string;
 }
 
-export interface Dictionary {
-  dict: DictionaryItem[];
-}
-
 export enum Languages {
   English = "English",
   Danish = "Danish",
