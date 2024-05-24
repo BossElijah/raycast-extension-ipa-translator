@@ -8,17 +8,20 @@ export const readDictionaryData = (path: string) => {
 
 export const getTranslation = (
   text: string,
-  dictionaryPlaceholder: string,
+  dictionary: DictionaryItem[],
   setWordsNotFound: Dispatch<SetStateAction<string[]>>,
 ) => {
   if (!text) {
     return "";
   }
-  if (!dictionaryPlaceholder) {
-    return "This language is not supported yet!";
-  }
 
-  const dictionary: DictionaryItem[] = JSON.parse(dictionaryPlaceholder);
+  function findInDictionary(word: string) {
+    const item = dictionary.filter(({ o }) => o === word);
+    if (!item[0]) {
+      return "";
+    }
+    return item[0].i;
+  }
 
   const result: string[] = [];
   const words = text
@@ -32,24 +35,22 @@ export const getTranslation = (
     .split(" ");
 
   words.forEach((item) => {
-    const word = dictionary.find(({ o: original }) => original == item);
-    if (!word) {
-      if (item) {
-        setWordsNotFound((prevState) => [...prevState, item]);
-        // If a word doesn't match a word in the dictionary, check if any of the
-        // letters match something, otherwise return the letter as input.
-        const letterArray = item.split("");
-        letterArray.forEach((nestedItem) => {
-          const letter = dictionary.find(({ o: original }) => original == nestedItem);
-          if (letter) {
-            result.push(letter.i);
-          } else {
-            result.push(nestedItem);
-          }
-        });
-      }
-    } else {
-      result.push(word.i);
+    const word = findInDictionary(item);
+    if (word) {
+      result.push(word);
+    } else if (item) {
+      // If a word doesn't match a word in the dictionary, check if any of the
+      // letters match something, otherwise return the letter as input.
+      setWordsNotFound((prevState) => [...prevState, item]);
+      const letterArray = item.split("");
+      letterArray.forEach((nestedItem) => {
+        const letter = findInDictionary(nestedItem);
+        if (letter) {
+          result.push(letter);
+        } else {
+          result.push(nestedItem);
+        }
+      });
     }
   });
 
