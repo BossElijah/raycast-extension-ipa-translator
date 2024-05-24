@@ -42,7 +42,7 @@
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.72.1",
+    "@raycast/api": "^1.74.0",
     "fs-extra": "^11.2.0"
   },
   "devDependencies": {
