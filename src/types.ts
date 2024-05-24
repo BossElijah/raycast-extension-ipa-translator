@@ -1,6 +1,8 @@
 export interface DictionaryItem {
-  original: string;
-  ipa: string;
+  // Short for original.
+  o: string;
+  // Short for IPA.
+  i: string;
 }
 
 export interface Dictionary {

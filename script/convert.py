@@ -35,7 +35,7 @@ def convert(file_path):
         if not parts:
             continue
 
-        dict.append({'original': parts.group(1), 'ipa': parts.group(2)})
+        dict.append({'o': parts.group(1), 'i': parts.group(2)})
 
     return {'dict': dict}
 

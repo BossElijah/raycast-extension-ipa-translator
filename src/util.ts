@@ -30,10 +30,9 @@ export const getTranslation = (
     // Remove trailing whitespace.
     .replace(/[ \t]+$/, "")
     .split(" ");
-  console.log(words);
 
   words.forEach((item) => {
-    const word = dictionary.dict.find(({ original }) => original == item);
+    const word = dictionary.dict.find(({ o: original }) => original == item);
     if (!word) {
       if (item) {
         setWordsNotFound((prevState) => [...prevState, item]);
@@ -41,16 +40,16 @@ export const getTranslation = (
         // letters match something, otherwise return the letter as input.
         const letterArray = item.split("");
         letterArray.forEach((nestedItem) => {
-          const letter = dictionary.dict.find(({ original }) => original == nestedItem);
+          const letter = dictionary.dict.find(({ o: original }) => original == nestedItem);
           if (letter) {
-            result.push(letter.ipa);
+            result.push(letter.i);
           } else {
             result.push(nestedItem);
           }
         });
       }
     } else {
-      result.push(word.ipa);
+      result.push(word.i);
     }
   });
 
